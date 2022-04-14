@@ -81,7 +81,7 @@ setfont ter-v24b
 
 **8A) Boot EFI Drive Setup**
 ```
-gdisk /dev/nvme1n1
+gdisk /dev/nvme0n1
 ```
 - Type 'o' to create a partition table
 - Type 'n' for a new partition
@@ -109,51 +109,51 @@ Press 'w' to write changes to disk.
 
 **8E) Create the encrypted filesystems**
 ```
-cryptsetup luksFormat /dev/nvme1n1p2
+cryptsetup luksFormat /dev/nvme0n1p2
 ```
 ```
-cryptsetup open /dev/nvme1n1p2 cryptlvm
+cryptsetup open /dev/nvme0n1p2 kurama
 ```
 ```
-pvcreate /dev/mapper/cryptlvm
+pvcreate /dev/mapper/kurama
 ```
 ```
-vgcreate datafortress /dev/mapper/cryptlvm
+vgcreate eighttrigramssealing /dev/mapper/kurama
 ```
 
 **8F) Create encrypted partitions**
 ```
-lvcreate -L 48G datafortress -n swap
+lvcreate -L 48G eighttrigramssealing -n swap
 ```
 ```
-lvcreate -L 64G datafortress -n root
+lvcreate -L 64G eighttrigramssealing -n root
 ```
 ```
-lvcreate -l +100%FREE datafortress -n home
+lvcreate -l +100%FREE eighttrigramssealing -n home
 ```
 
 **8G) Create filesystems**
 ```
 mkfs.vat -F32 /dev/sdX1
-mkfs.ext4 /dev/mapper/datafortress-root
-mkfs.ext4 /dev/mapper/datafortress-home
-mkswap /dev/mapper/datafortress-swap
+mkfs.ext4 /dev/mapper/eighttrigramssealing-root
+mkfs.ext4 /dev/mapper/eighttrigramssealing-home
+mkswap /dev/mapper/eighttrigramssealing-swap
 ```
 
 **8H) Mount partitions**
 ```
-mount /dev/mapper/datafortress-root /mnt
+mount /dev/mapper/eighttrigramssealing-root /mnt
 ```
 ```
 mkdir /mnt/home
 ```
 mkdir /mnt/boot
 ```
-mount /dev/mapper/datafortress-home /mnt/home
+mount /dev/mapper/eighttrigramssealing-home /mnt/home
 ```
-mount /dev/nvme1n1p1 /mnt/boot
+mount /dev/nvme0n1p1 /mnt/boot
 ```
-swapon /dev/mapper/datafortress-swap
+swapon /dev/mapper/eighttrigramssealing-swap
 ```
 
 **9) Install Arch linux base and vim packages**
@@ -294,7 +294,7 @@ bootctl install
 ```
 
 **24) Create linux boot entry**
-Check for the name and note it down, most likely it is /dev/nvme1n1p2
+Check for the name and note it down, most likely it is /dev/nvme0n1p2
 ```
 lsblk -lh
 ```
@@ -313,7 +313,7 @@ linux /vmlinuz-linux-g14
 initrd /amd-ucode.img
 initrd /initramfs-linux-g14.img
 options cryptdevice=UUID=33f6b22c-fc1e-47fe-8901-5ccbe7c64dda:lvm:allow-discards \
-resume=/dev/mapper/datafortress-swap root=/dev/mapper/datafortress-root rw \
+resume=/dev/mapper/eighttrigramssealing-swap root=/dev/mapper/eighttrigramssealing-root rw \
 pci=noaer nvidia-drm.modeset=0 quiet splash
 ```
 
@@ -324,15 +324,15 @@ lsblk
 You will see something like 
 ```
     NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
-    nvme1n1     259:0    0 953.9G  0 disk 
+    nvme0n1     259:0    0 953.9G  0 disk 
     ...
-    nvme0n1     259:4    0 465.8G  0 disk 
-    -> nvme0n1p1 259:5    0   100M  0 part 
-       nvme0n1p2 259:6    0    16M  0 part 
+    nvme1n1     259:4    0 465.8G  0 disk 
+    -> nvme1n1p1 259:5    0   100M  0 part 
+       nvme1n1p2 259:6    0    16M  0 part 
     ...
 ```
 ```
-mount /dev/nvme0n1p1 /mnt
+mount /dev/nvme1n1p1 /mnt
 ```
 ```
 cp -R /mnt/EFI/Boot /boot/EFI/
