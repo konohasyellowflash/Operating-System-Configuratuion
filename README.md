@@ -488,7 +488,7 @@ libinput-gestures-setup start
 
 **33) Installing Razer software for keyboard, mouse configuration**
 ```
-paru -S openrazer-meta razercommander
+paru -S openrazer-driver-dkms openrazer-daemon openrazer-meta razercommander
 ```
 ```
 sudo gpasswd -a $USER plugdev
