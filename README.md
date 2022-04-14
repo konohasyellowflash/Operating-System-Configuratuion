@@ -226,7 +226,7 @@ pacman -S mate mate-extra
 ```
 **iii) Additional packages**
 ```
-pacman -Sy firefox deepin-icon-theme deepin-gtk-theme bauh virtualgl vlc \
+pacman -Sy firefox deepin-icon-theme deepin-gtk-theme virtualgl vlc \
 pulseaudio-bluetooth signal-desktop qbittorrent kdenlive gimp obs-studio
 ```
 
