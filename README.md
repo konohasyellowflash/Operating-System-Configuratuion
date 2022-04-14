@@ -318,9 +318,7 @@ title arch
 linux /vmlinuz-linux-g14
 initrd /amd-ucode.img
 initrd /initramfs-linux-g14.img
-options cryptdevice=UUID=33f6b22c-fc1e-47fe-8901-5ccbe7c64dda:lvm:allow-discards \
-resume=/dev/mapper/eighttrigramssealing-swap root=/dev/mapper/eighttrigramssealing-root rw \
-pci=noaer nvidia-drm.modeset=0 quiet splash
+options cryptdevice=UUID=33f6b22c-fc1e-47fe-8901-5ccbe7c64dda:lvm:allow-discards resume=/dev/mapper/eighttrigramssealing-swap root=/dev/mapper/eighttrigramssealing-root rw pci=noaer nvidia-drm.modeset=0 quiet splash
 ```
 
 **25) Enable boot menu item for windows**
