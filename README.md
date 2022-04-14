@@ -136,7 +136,7 @@ lvcreate -l +100%FREE eighttrigramssealing -n home
 
 **8G) Create filesystems**
 ```
-mkfs.vat -F32 /dev/sdX1
+mkfs.fat -F32 /dev/nvme0n1p1
 mkfs.ext4 /dev/mapper/eighttrigramssealing-root
 mkfs.ext4 /dev/mapper/eighttrigramssealing-home
 mkswap /dev/mapper/eighttrigramssealing-swap
@@ -149,11 +149,15 @@ mount /dev/mapper/eighttrigramssealing-root /mnt
 ```
 mkdir /mnt/home
 ```
+```
 mkdir /mnt/boot
+```
 ```
 mount /dev/mapper/eighttrigramssealing-home /mnt/home
 ```
+```
 mount /dev/nvme0n1p1 /mnt/boot
+```
 ```
 swapon /dev/mapper/eighttrigramssealing-swap
 ```
