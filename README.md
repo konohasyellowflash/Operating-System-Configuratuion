@@ -23,7 +23,7 @@ https://archlinux.org/download/
 dd if=archlinux-version-x86_64.iso of=/dev/sdb bs=4M
 ```
 **Note**
-Only issue which might appear is nouveau crashing the installation, this can be solved by adding a boot parameter modprobe.blacklist=nouveau to the kernel cmdline before booting the installation media
+Only issue which might appear is nouveau crashing the installation, this can be solved by adding a boot parameter **modprobe.blacklist=nouveau** to the kernel cmdline before booting the installation media
 
 **3. Connect to Internet**
 
