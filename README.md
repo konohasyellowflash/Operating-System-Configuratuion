@@ -626,3 +626,12 @@ need to relogin after switching
 ```
 sudo supergfxctl -g 
 ```
+**46) Machine Learning Setup**
+```
+sudo pacman -Syu cuda cudnn jupyter-notebook python-tensorflow-cuda
+```
+**To test gpu availability**
+```
+import tensorflow as tf
+tf.test.is_gpu_available()
+```
