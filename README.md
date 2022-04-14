@@ -630,7 +630,7 @@ sudo supergfxctl -g
 ```
 sudo pacman -Syu cuda cudnn jupyter-notebook python-tensorflow-cuda
 ```
-**To test gpu availability**
+To test gpu availability
 ```
 import tensorflow as tf
 tf.test.is_gpu_available()
